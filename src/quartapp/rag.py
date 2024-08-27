@@ -178,6 +178,7 @@ async def perform_rag_search(
     chat_function: KernelFunction,
     query_term: str,
 ) -> FunctionResult | None:
+    logging.info(f'Performing RAG search on query term "{query_term}"')
     vector_search_result: list[MemoryQueryResult] = await perform_vector_search(memory, query_term)
     db_record: str = str(vector_search_result[0].additional_metadata)
 
