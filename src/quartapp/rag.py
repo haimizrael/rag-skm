@@ -111,7 +111,7 @@ async def initialize_sk_memory_store(
             kind = "vector-ivf",
             m = 16,
             ef_construction = 64,
-            efsearch = 40
+            efSearch = 40
         )
         logging.info("Finished updating Azure Cosmos DB Memory Store...")
 
