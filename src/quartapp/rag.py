@@ -200,6 +200,9 @@ async def perform_vector_search(memory: SemanticTextMemory, query_term: str) -> 
         logging.info(f"Performing vector search on collection name '{collection_name}' and query term '{query_term}'")
         vector_search_result = await memory.search(collection_name, query_term)
     except ServiceResponseException:
+        vector_search_result = []
+
+    if vector_search_result == []:
         vector_search_result = [
             MemoryQueryResult(
                 is_reference=False,
