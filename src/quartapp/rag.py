@@ -197,6 +197,7 @@ async def perform_rag_search(
 
 async def perform_vector_search(memory: SemanticTextMemory, query_term: str) -> list[MemoryQueryResult]:
     try:
+        logging.info(f"Performing vector search on collection name '{collection_name}' and query term '{query_term}'")
         vector_search_result = await memory.search(collection_name, query_term)
     except ServiceResponseException:
         vector_search_result = [
@@ -211,4 +212,5 @@ async def perform_vector_search(memory: SemanticTextMemory, query_term: str) -> 
                 relevance=0.0,
             )
         ]
+    logging.info(f"Returning vector search result {vector_search_result}")
     return vector_search_result
