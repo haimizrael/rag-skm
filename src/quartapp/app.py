@@ -57,11 +57,16 @@ def create_app(test_config=None) -> CustomQuart:
 
     @app.route("/chat", methods=["POST"])
     async def chat_handler() -> Any:
+        logging.information(f"Starting /chat")
         body = await request.get_json()
         query_term = body.get("message", "Blank")
         rag_or_vector = body.get("option", "rag")
 
         try:
+            logging.information(f"retrieved params query:{query_term}")
+            logging.information(f"retrieved params rag or vector:{rag_or_vector}")
+            logging.information(f"retrieved params body:{body}")
+            
             if rag_or_vector == "rag":
                 rag_response: FunctionResult | None = await perform_rag_search(
                     app.sk_kernel, app.sk_memory, app.sk_function, query_term
